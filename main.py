@@ -3,7 +3,7 @@ import typing
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QLabel,
-    QWidget, QVBoxLayout, QHBoxLayout,
+    QWidget, QVBoxLayout, QHBoxLayout, QCheckBox,
     QGridLayout, QPushButton)
 from PyQt5.QtGui import QIcon, QFont, QPixmap
 from PyQt5.QtCore import Qt
@@ -14,20 +14,35 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('HQGROUP')
         self.setGeometry(700,300,500,500)
         self.setWindowIcon(QIcon("logo.png"))
-        self.button = QPushButton("Click me!", self)
-        self.lable = QLabel("HQGROUP", self)
+        self.checkbox = QCheckBox("Do you like food?", self)
+        # self.button = QPushButton("Click me!", self)
+        # self.lable = QLabel("HQGROUP", self)
         self.initUI() 
 
     def initUI(self):
-        self.button.setGeometry(150, 200,200,100)
-        self.button.setStyleSheet("font-size: 30px")
-        self.button.clicked.connect(self.on_click)
+        self.checkbox.setGeometry(10,0,500,100)
+        self.checkbox.setStyleSheet("font-size: 16px;font-family: Arial")
+        self.checkbox.setChecked(False)
+        self.checkbox.stateChanged.connect(self.checkbox_changed)
+        
+    def checkbox_changed(self, state):
+        print(state)
+    
+        if state == Qt.Checked:
+            print("You like food")
+        else:
+            print("You do not like food")
+        # self.button.setGeometry(150, 200,200,100)
+        # self.button.setStyleSheet("font-size: 30px")
+        # self.button.clicked.connect(self.on_click)
 
-        self.lable.setGeometry(150,300,200,100)
-        self.lable.setStyleSheet("font-size: 50px")
+        # self.lable.setGeometry(150,300,200,100)
+        # self.lable.setStyleSheet("font-size: 50px")
 
-    def on_click(self):
-        self.lable.setText("Goodbuye!")
+    # def on_click(self):
+
+        # self.lable.setText("Goodbuye!")
+
         # print("Button click")
         # self.button.setText("Clicked!")
         # self.button.setDisabled(True)
